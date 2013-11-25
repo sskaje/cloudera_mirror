@@ -1,6 +1,6 @@
 #!/bin/sh
 
-WGET="/usr/bin/wget -N -r -m" 
+WGET="/usr/bin/wget -m" 
 PHP=/usr/bin/php
 FIND=/usr/bin/find
 CURRENT_DIR=`dirname "$0"`
@@ -13,6 +13,7 @@ $WGET  http://archive.cloudera.com/cm4/redhat/6/x86_64/cm/cloudera-manager.repo
 
 $WGET  http://archive.cloudera.com/cdh4/parcels/latest/ --accept-regex='latest/.*el6.*'
 $WGET  http://archive.cloudera.com/cdh4/parcels/latest/manifest.json
+$PHP clear_outdated.php http://archive.cloudera.com/cdh4/parcels/latest/
 
 $WGET  http://archive.cloudera.com/cm5/redhat/6/x86_64/cm/5/ --accept-regex='\/5\/' --reject-regex='index\.html'
 $WGET  http://archive.cloudera.com/cm5/installer/latest/cloudera-manager-installer.bin 
