@@ -10,6 +10,7 @@ $WGET  http://archive.cloudera.com/cm4/redhat/6/x86_64/cm/4/ --accept-regex='\/4
 $WGET  http://archive.cloudera.com/cm4/installer/latest/cloudera-manager-installer.bin 
 $WGET  http://archive.cloudera.com/cm4/redhat/6/x86_64/cm/RPM-GPG-KEY-cloudera
 $WGET  http://archive.cloudera.com/cm4/redhat/6/x86_64/cm/cloudera-manager.repo
+$PHP clear_outdated.php http://archive.cloudera.com/cm4/redhat/6/x86_64/cm/4/RPMS/x86_64/ 
 
 $WGET  http://archive.cloudera.com/cdh4/parcels/latest/ --accept-regex='latest/.*el6.*'
 $WGET  http://archive.cloudera.com/cdh4/parcels/latest/manifest.json
@@ -19,6 +20,7 @@ $WGET  http://archive.cloudera.com/cm5/redhat/6/x86_64/cm/5/ --accept-regex='\/5
 $WGET  http://archive.cloudera.com/cm5/installer/latest/cloudera-manager-installer.bin 
 $WGET  http://archive.cloudera.com/cm5/redhat/6/x86_64/cm/RPM-GPG-KEY-cloudera
 $WGET  http://archive.cloudera.com/cm5/redhat/6/x86_64/cm/cloudera-manager.repo
+$PHP clear_outdated.php http://archive.cloudera.com/cm5/redhat/6/x86_64/cm/5/RPMS/x86_64/
 
 $WGET  http://archive.cloudera.com/cdh5/parcels/latest/ --accept-regex='latest/.*el6.*'
 $WGET  http://archive.cloudera.com/cdh5/parcels/latest/manifest.json
