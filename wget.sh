@@ -42,6 +42,10 @@ $PHP clear_outdated.php http://archive.cloudera.com/sentry/parcels/latest/
 $WGET  http://archive.cloudera.com/gplextras/parcels/latest/ --accept-regex='latest/.*el6.*'
 $WGET  http://archive.cloudera.com/gplextras/parcels/latest/manifest.json
 $PHP clear_outdated.php http://archive.cloudera.com/gplextras/parcels/latest/
+$WGET  http://archive.cloudera.com/spark/parcels/latest/ --accept-regex='latest/.*el6.*'
+$WGET  http://archive.cloudera.com/spark/parcels/latest/manifest.json
+$PHP clear_outdated.php http://archive.cloudera.com/spark/parcels/latest/
+
 
 $FIND archive.cloudera.com -name "index.html*" -type f -exec rm -f {} \;
 
