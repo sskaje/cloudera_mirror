@@ -1,9 +1,27 @@
-#!/bin/sh
+#!/bin/bash
 
 WGET="/usr/bin/wget -m" 
 PHP=/usr/bin/php
 FIND=/usr/bin/find
 CURRENT_DIR=`dirname "$0"`
+
+PARCELS=(
+    "http://archive.cloudera.com/cdh4/parcels/latest/"
+    "http://archive.cloudera.com/cdh5/parcels/latest/"
+    "http://archive.cloudera.com/search/parcels/latest/" 
+    "http://archive.cloudera.com/impala/parcels/latest/" 
+    "http://archive.cloudera.com/sentry/parcels/latest/" 
+    "http://archive.cloudera.com/gplextras/parcels/latest/"
+    "http://archive.cloudera.com/spark/parcels/latest/"
+)
+
+function download_parcel()
+{
+    $WGET  $1 --accept-regex='latest/.*el6.*'
+    $WGET  $1/manifest.json
+    $PHP clear_outdated.php $1
+}
+
 cd $CURRENT_DIR
 
 $WGET  http://archive.cloudera.com/cm4/redhat/6/x86_64/cm/4/ --accept-regex='\/4\/' --reject-regex='index\.html'
@@ -12,40 +30,21 @@ $WGET  http://archive.cloudera.com/cm4/redhat/6/x86_64/cm/RPM-GPG-KEY-cloudera
 $WGET  http://archive.cloudera.com/cm4/redhat/6/x86_64/cm/cloudera-manager.repo
 $PHP clear_outdated.php http://archive.cloudera.com/cm4/redhat/6/x86_64/cm/4/RPMS/x86_64/ 
 
-$WGET  http://archive.cloudera.com/cdh4/parcels/latest/ --accept-regex='latest/.*el6.*'
-$WGET  http://archive.cloudera.com/cdh4/parcels/latest/manifest.json
-$PHP clear_outdated.php http://archive.cloudera.com/cdh4/parcels/latest/
-
 $WGET  http://archive.cloudera.com/cm5/redhat/6/x86_64/cm/5/ --accept-regex='\/5\/' --reject-regex='index\.html'
 $WGET  http://archive.cloudera.com/cm5/installer/latest/cloudera-manager-installer.bin 
 $WGET  http://archive.cloudera.com/cm5/redhat/6/x86_64/cm/RPM-GPG-KEY-cloudera
 $WGET  http://archive.cloudera.com/cm5/redhat/6/x86_64/cm/cloudera-manager.repo
 $PHP clear_outdated.php http://archive.cloudera.com/cm5/redhat/6/x86_64/cm/5/RPMS/x86_64/
 
-$WGET  http://archive.cloudera.com/cdh5/parcels/latest/ --accept-regex='latest/.*el6.*'
-$WGET  http://archive.cloudera.com/cdh5/parcels/latest/manifest.json
-$PHP clear_outdated.php http://archive.cloudera.com/cdh5/parcels/latest/
 
 # fix cm yum repo link
 $PHP fixlink.php cm4 
 $PHP fixlink.php cm5
 
-$WGET  http://archive.cloudera.com/search/parcels/latest/ --accept-regex='latest/.*el6.*'
-$WGET  http://archive.cloudera.com/search/parcels/latest/manifest.json
-$PHP clear_outdated.php http://archive.cloudera.com/search/parcels/latest/
-$WGET  http://archive.cloudera.com/impala/parcels/latest/ --accept-regex='latest/.*el6.*'
-$WGET  http://archive.cloudera.com/impala/parcels/latest/manifest.json
-$PHP clear_outdated.php http://archive.cloudera.com/impala/parcels/latest/
-$WGET  http://archive.cloudera.com/sentry/parcels/latest/ --accept-regex='latest/.*el6.*'
-$WGET  http://archive.cloudera.com/sentry/parcels/latest/manifest.json
-$PHP clear_outdated.php http://archive.cloudera.com/sentry/parcels/latest/
-$WGET  http://archive.cloudera.com/gplextras/parcels/latest/ --accept-regex='latest/.*el6.*'
-$WGET  http://archive.cloudera.com/gplextras/parcels/latest/manifest.json
-$PHP clear_outdated.php http://archive.cloudera.com/gplextras/parcels/latest/
-$WGET  http://archive.cloudera.com/spark/parcels/latest/ --accept-regex='latest/.*el6.*'
-$WGET  http://archive.cloudera.com/spark/parcels/latest/manifest.json
-$PHP clear_outdated.php http://archive.cloudera.com/spark/parcels/latest/
-
+# Download All parcels
+for i in ${PARCELS[@]}; do
+    download_parcel $i;
+done
 
 $FIND archive.cloudera.com -name "index.html*" -type f -exec rm -f {} \;
 
