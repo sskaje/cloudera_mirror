@@ -6,13 +6,19 @@ FIND=/usr/bin/find
 CURRENT_DIR=`dirname "$0"`
 
 PARCELS=(
-    "http://archive.cloudera.com/cdh4/parcels/latest/"
     "http://archive.cloudera.com/cdh5/parcels/latest/"
+    "http://archive.cloudera.com/gplextras5/parcels/latest/"
+	"http://archive.cloudera.com/cm5/installer/latest/"
+	"http://archive.cloudera.com/sqoop-connectors/parcels/latest/"
+
+    "http://archive.cloudera.com/cdh4/parcels/latest/"
     "http://archive.cloudera.com/search/parcels/latest/" 
     "http://archive.cloudera.com/impala/parcels/latest/" 
     "http://archive.cloudera.com/sentry/parcels/latest/" 
     "http://archive.cloudera.com/gplextras/parcels/latest/"
     "http://archive.cloudera.com/spark/parcels/latest/"
+    "http://archive.cloudera.com/accumulo/parcels/latest/"
+	"http://archive.cloudera.com/cm4/installer/latest/"
 )
 
 function download_parcel()
