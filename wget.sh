@@ -19,6 +19,8 @@ PARCELS=(
     "http://archive.cloudera.com/spark/parcels/latest/"
     "http://archive.cloudera.com/accumulo/parcels/latest/"
 	"http://archive.cloudera.com/cm4/installer/latest/"
+
+	"http://archive.cloudera.com/accumulo-c5/parcels/latest/"
 )
 
 function download_parcel()

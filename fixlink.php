@@ -19,7 +19,7 @@ preg_match_all('#<a href="([\d\.a-z\-]+)/">([\d\.a-z\-]+)/</a>#', $web_contents,
 
 @chdir(__DIR__ . '/' . $domain . $path);
 foreach ($m[2] as $k=>$v) {
-    if ($v === $compare_with) {
+    if ($v === $compare_with || strpos($v, $compare_with) === 0) {
         continue;
     }
     $name = $v;
